@@ -37,11 +37,6 @@ typedef struct{
 }locacao;
 
 
-typedef struct{
-
-
-};
-
 
 
 int main(void){
