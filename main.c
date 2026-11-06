@@ -1,6 +1,49 @@
 #include <stdio.h>
 #include <locale.h>
 
+typedef struct{
+	int dia;
+	int mes;
+	int ano;
+}data;
+
+typedef struct{
+	int codigoCategoria;
+	char nome[20];
+}categora;
+
+
+typedef struct{
+ char codigoVeiculo[30];
+ char marca[20];
+ char modelo[40];
+ int categoria;
+ int ano;
+ float diaria;
+ int qtdUnidades;
+ int qtdAlugada;
+}veiculo;
+
+typedef struct{
+	int numero;
+	codigoVeiculo;\\outro typedef
+	dataRetirada;\\outro typedef
+	dataPrevistaDevolucao;\\outro typedef
+	dataDevolucao;\\outro typedef
+	int status;
+	diariaAtrasoContrato;\\outro typedef
+	valorPrevisto;\\outro typedef
+	valorPago;\\outro typedef
+}locacao;
+
+
+typedef struct{
+
+
+};
+
+
+
 int main(void){
 	setlocale(LC_ALL, "Portuguese");
 	int select, i;
