@@ -11,7 +11,7 @@ int main(void){
 	"======================================================\n"
 	" >SELECIONE UMA DAS OPÇÕES ABAIXO PARA PROSSEGUIR<\n"
 	"\n\n 0) SAIR DA APLICAÇÃO" 
-	"1) CADASTRAR CATEGORIA."
+	"\n 1) CADASTRAR CATEGORIA."
 	"\n 2) EXIBIR CATEGORIAS."
 	"\n 3) INSERIR VEÍCULO."
 	"\n 4) EXIBIR RELAÇÃO DE VEÍCULOS."
