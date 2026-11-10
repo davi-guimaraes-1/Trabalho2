@@ -26,7 +26,7 @@ typedef struct{
 
 typedef struct{
 	int numero;
-	codigoVeiculo;\\outro typedef
+	veiculo codigoVeiculo;
 	dataRetirada;\\outro typedef
 	dataPrevistaDevolucao;\\outro typedef
 	dataDevolucao;\\outro typedef
