@@ -27,13 +27,13 @@ typedef struct{
 typedef struct{
 	int numero;
 	veiculo codigoVeiculo;
-	dataRetirada;\\outro typedef
-	dataPrevistaDevolucao;\\outro typedef
-	dataDevolucao;\\outro typedef
+	data dataRetirada;
+	data dataPrevistaDevolucao;
+	dat dataDevolucao;
 	int status;
-	diariaAtrasoContrato;\\outro typedef
-	valorPrevisto;\\outro typedef
-	valorPago;\\outro typedef
+	float diariaAtrasoContrato;
+	float valorPrevisto;
+	float valorPago;
 }locacao;
 
 
@@ -68,23 +68,23 @@ int main(void){
 		case 0:
 			
 		case 1:
-			
+			cadastraCategoria;
 		case 2:
-			
+			exibieCategoria;
 		case 3:
-			
+			cadastraVeiculo;
 		case 4:
-			
+			exibirRelacao;
 		case 5:
-			
+			realizarAluguel;
 		case 6:
-			
+			realizarDevolucao;
 		case 7:
-			
+			exibirVeiculosAlugadosCategoria;
 		case 8:
-		
+			exibirTodosVeiculoAlugadoPorCategoria;
 		case 9:
-			
+			exibirLocacoesAbertasGeral;
 		default : 
 			printf("\n\Opção inválida!\n\n");
 			i--;
