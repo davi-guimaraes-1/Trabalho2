@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include <locale.h>
+#include <locadora.h
+>#include <locale.h>
 
 typedef struct{
 	int dia;
