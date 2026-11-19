@@ -27,7 +27,7 @@ typedef struct{
 
 typedef struct{
 	int numero;
-	veiculo codigoVeiculo;
+	char codigoVeiculo[30];
 	data dataRetirada;
 	data dataPrevistaDevolucao;
 	data dataDevolucao;
