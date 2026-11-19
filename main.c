@@ -64,28 +64,39 @@ int main(void){
 	printf("Digite a opção desejada: ");
 	scanf("%d", &select);
 	
-	
+
+		i++;
 	switch (select){
 		case 0:
-			
+			i--;
+			break;
 		case 1:
 			cadastraCategoria;
+			continue;
 		case 2:
 			exibieCategoria;
+			continue;
 		case 3:
 			cadastraVeiculo;
+			continue;
 		case 4:
 			exibirRelacao;
+			continue;
 		case 5:
 			realizarAluguel;
+			continue;
 		case 6:
 			realizarDevolucao;
+			continue;
 		case 7:
 			exibirVeiculosAlugadosCategoria;
+			continue;
 		case 8:
 			exibirTodosVeiculoAlugadoPorCategoria;
+			continue;
 		case 9:
 			exibirLocacoesAbertasGeral;
+			continue;
 		default : 
 			printf("\n\Opção inválida!\n\n");
 			i--;
