@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <locadora.h
+#include <locadora.h>
 >#include <locale.h>
 
 typedef struct{
