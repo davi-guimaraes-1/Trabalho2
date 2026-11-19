@@ -30,7 +30,7 @@ typedef struct{
 	veiculo codigoVeiculo;
 	data dataRetirada;
 	data dataPrevistaDevolucao;
-	dat dataDevolucao;
+	data dataDevolucao;
 	int status;
 	float diariaAtrasoContrato;
 	float valorPrevisto;
