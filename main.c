@@ -11,7 +11,7 @@ typedef struct{
 typedef struct{
 	int codigoCategoria;
 	char nome[20];
-}categora;
+}categoria;
 
 
 typedef struct{
