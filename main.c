@@ -37,7 +37,7 @@ int main(void) {
 				cadastraCategoria;
 				continue;
 			case 2:
-				exibieCategoria;
+				exibirCategoria;
 				continue;
 			case 3:
 				cadastraVeiculo;
