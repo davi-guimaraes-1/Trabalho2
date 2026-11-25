@@ -4,7 +4,7 @@
 
 void cadastraCategoria() {
 }
-void exibieCategoria() {
+void exibirCategoria() {
 }
 void cadastraVeiculo() {
 }
