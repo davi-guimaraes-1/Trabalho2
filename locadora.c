@@ -36,3 +36,21 @@ typedef struct {
 	float valorPago;
 } locacao;
 
+void cadastraCategoria() {
+}
+void exibieCategoria() {
+}
+void cadastraVeiculo() {
+}
+void exibirRelacao() {
+}
+void realizarAluguel() {
+}
+void realizarDevolucao() {
+}
+void exibirVeiculosAlugadosCategoria() {
+}
+void exibirTodosVeiculoAlugadoPorCategoria() {
+}
+void exibirLocacoesAbertasGeral() {
+}
