@@ -33,7 +33,7 @@ typedef struct {
 } locacao;
 
 void cadastraCategoria();
-void exibieCategoria();
+void exibirCategoria();
 void cadastraVeiculo();
 void exibirRelacao();
 void realizarAluguel();
