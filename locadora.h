@@ -42,7 +42,7 @@ typedef struct {
 int cadastraCategoria(categoria categorias[], int qtd);
 void exibirCategoria(categoria categorias[], int qtd);
 int cadastraVeiculo(veiculo veiculos[], int qtd, categoria categorias[], int qtdCat);
-void exibirRelacao();
+void exibirRelacao(veiculo veiculos[], categoria categorias[], int qtdVeic, int qtdCat);
 void realizarAluguel();
 void realizarDevolucao();
 void exibirVeiculosAlugadosCategoria();
