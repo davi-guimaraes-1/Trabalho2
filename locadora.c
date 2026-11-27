@@ -69,7 +69,7 @@ void exibirCategoria(categoria categorias[], int qtd) {
 	}
 }
 
-int cadastraVeiculo(veiculo veiculos[], int qtd) {
+int cadastraVeiculo(veiculo veiculos[], int qtd, categoria categorias[], int qtdCat) {
 	//vetores auxiliares para caso haja erro não passe valores errados ao struct
 	char codigo[30];
 	char marca[20];
@@ -77,6 +77,8 @@ int cadastraVeiculo(veiculo veiculos[], int qtd) {
 	int codCategoria, ano, qtdUnidades;
 	int i;
 	float diaria;
+	int pos;
+	char resp;
 
 	if (qtd >= MAX_VEICULOS) {
 		printf("Número máximo de veiculos atingido!\n");
@@ -123,9 +125,10 @@ int cadastraVeiculo(veiculo veiculos[], int qtd) {
 		return 0;
 	}
 	limpaBuffer();
-	pos = buscaCategoria(categoria, qtd, codCategoria);
+	pos = buscaCategoria(categorias, qtdCat, codCategoria);
 	if(pos ==  -1){
 		printf("Categoria não cadastrada!\n");
+		return 0;
 	}
 	printf("\nCategoria encontrada: %s\n", categorias[pos].nome);//pos é a posição, por isso dá pra pegar o nome
 	printf("Confirma? (S/N): ");
