@@ -1,6 +1,9 @@
+#ifndef LOCADORA_H
+#define LOCADORA_H
 #define MAX_LOCACOES 1000
 #define MAX_CATEGORIAS 10
 #define MAX_VEICULOS 100
+#endif
 
 typedef struct {
 	int dia;
@@ -38,10 +41,12 @@ typedef struct {
 
 int cadastraCategoria(categoria categorias[], int qtd);
 void exibirCategoria(categoria categorias[], int qtd);
-int cadastraVeiculo(veiculo veiculos[], int qtd);
+int cadastraVeiculo(veiculo veiculos[], int qtd, categoria categorias[], int qtdCat);
 void exibirRelacao();
 void realizarAluguel();
 void realizarDevolucao();
 void exibirVeiculosAlugadosCategoria();
 void exibirTodosVeiculoAlugadoPorCategoria();
 void exibirLocacoesAbertasGeral();
+void limpaBuffer();
+int buscaCategoria(categoria categorias[], int qtd, int codigo);
