@@ -42,10 +42,6 @@ int cadastraCategoria(categoria categorias[], int qtd) {
 		//verifica se o usuario colocou un codigo repetido
 		}
 	}
-
-	categorias[qtd].codigoCategoria = codigo;
-	//atribui o valor e codigo informado pelo usuario ao struct
-	//a variavel codigo foi usado por segurança, pois caso haja algum erro o programa não amarzena diretamente no struct 
 	
 	printf("\n\n Informe o nome da categoria que deseja cadastrar: ");
 	if (scanf(" %19[^\n]", categorias[qtd].nome) != 1){//verifica se houve erro ao digitar a string, caso haja retorna 0 e volta para o main
@@ -55,8 +51,16 @@ int cadastraCategoria(categoria categorias[], int qtd) {
 		return 0;
 	}
 	limpaBuffer();//limpa o buffer para previnir possiveis erros no programa
+	categorias[qtd].codigoCategoria = codigo;
+	
+	//atribui o valor e codigo informado pelo usuario ao struct
+	//a variavel codigo foi usado por segurança, pois caso haja algum erro o programa não amarzena diretamente no struct 
+
+	
+	
 	printf("\nCategoria cadastrada com sucesso!\n");
 	return 1;
+
 }
 
 void exibirCategoria(categoria categorias[], int qtd) {
