@@ -13,6 +13,7 @@ void limpaBuffer() {
     while ((c = getchar()) != '\n' && c != EOF) {
     }
 }
+
 int cadastraCategoria(categoria categorias[], int qtd) {
 	int codigo, i;
 	
@@ -54,6 +55,7 @@ int cadastraCategoria(categoria categorias[], int qtd) {
 	printf("\nCategoria cadastrada com sucesso!\n");
 	return 1;
 }
+
 void exibirCategoria(categoria categorias[], int qtd) {
 	int i;
 	for (i = 0; i < qtd; i++){
@@ -63,6 +65,7 @@ void exibirCategoria(categoria categorias[], int qtd) {
 		printf("======================================================\n");
 	}
 }
+
 int cadastraVeiculo(veiculo veiculos[], int qtd) {
 	char codigo[30];
 	char auxiliar[20];
