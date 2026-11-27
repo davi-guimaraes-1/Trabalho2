@@ -1,89 +1,47 @@
+
+
 #include <stdio.h>
-#include <string.h>
 #include <locale.h>
-#include <stdlib.h>
 #include "locadora.h"
-	
-	
-	
-	int main(void) {
-	veiculo veiculos[MAX_LOCACOES];
-	Categoria categorias[MAX_CATEGORIAS];
- 	locacao locacoes[MAX_VEICULOS];
-	int contCat=0;
-	int contVe=0;
-	int contLoc=0;
-	int qtdAcao;
-	
+
+int main() {
+	categoria categorias[MAX_CATEGORIAS];
+	veiculo veiculos[MAX_VEICULOS];
+	int qtdCat = 0, qtdVeic = 0;
+	int opcao, acoes = 0;
+
 	setlocale(LC_ALL, "Portuguese");
-	int select, i;
-	
+
 	do {
-		printf(
-		"======================================================\n"
-		" >SELECIONE UMA DAS OPÇÕES ABAIXO PARA PROSSEGUIR<\n"
-		"\n\n 0) SAIR DA APLICAÇÃO" 
-		"\n 1) CADASTRAR CATEGORIA."
-		"\n 2) EXIBIR CATEGORIAS."
-		"\n 3) INSERIR VEÍCULO."
-		"\n 4) EXIBIR RELAÇÃO DE VEÍCULOS."
-		"\n 5) REALIZAR ALUGUEL."
-		"\n 6) REALIZAR DEVOLUÇÃO"
-		"\n 7) EXIBIR VEÍCULOS ALUGADOS DE UMA DETERMINADA CATEGORIA"
-		"\n 8) EXIBIR VEÍCULOS ALUGADOS POR CATEGORIA."
-		"\n 9) EXIBIR LOCAÇÕES ABERTAS.\n\n\n"
-		"======================================================\n"
-		);
-		
-		printf("Digite a opção desejada: ");
-		scanf("%d", &select);
-		
-		i++;
-		
-		switch (select) {
+		printf("\n---------------- SISTEMA DE LOCADORA DE CARROS ----------------\n");
+		printf("0 - SAIR DA APLICAÇÃO\n");
+		printf("1 - Cadastrar categoria\n");
+		printf("2 - Exibir categorias\n");
+		printf("3 - Inserir veículo\n");
+		printf("\nDIGITE A OPÇÃO DESEJADA: ");
+
+		if (scanf("%d", &opcao) != 1) {
+			printf("\nEntrada inválida!\n");
+			limpaBuffer();
+			continue;
+		}
+		limpaBuffer();
+
+		switch (opcao) {
 			case 0:
-				i--;
 				break;
 			case 1:
-			if (cadastraCategoria(categorias, contCat) == 1) {
-   				contCat++;
-   				qtdAcao++;
-			}
-			continue;
-			case 2:
-				exibirCategoria(categorias, contCat);
-				qtdAcao++;
-				continue;
-			case 3:
-				if (cadastraVeiculo(veiculos, contVe) == 1){
-					contVe++;
-					qtdAcao++;
+				if (cadastraCategoria(categorias, qtdCat)) {
+					qtdCat++;
 				}
-				
-				continue;
-			case 4:
-				exibirRelacao();
-				continue;
-			case 5:
-				realizarAluguel();
-				continue;
-			case 6:
-				realizarDevolucao();
-				continue;
-			case 7:
-				exibirVeiculosAlugadosCategoria();
-				continue;
-			case 8:
-				exibirTodosVeiculoAlugadoPorCategoria();
-				continue;
-			case 9:
-				exibirLocacoesAbertasGeral();
-				continue;
-			default: 
-				printf("\n\n\Opção inválida!\n\n");
-				i--;
-				continue;
+				acoes++;
+				break;
+			/* case 2 e case 3: você escreve */
+			default:
+				printf("\nOpção inválida!\n");
 		}
-	} while(i != 0);
+	} while (opcao != 0);
+
+	printf("\nAções executadas: %d\n", acoes);
 	return 0;
 }
