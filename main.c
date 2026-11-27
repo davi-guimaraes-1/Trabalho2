@@ -80,7 +80,7 @@
 				exibirLocacoesAbertasGeral();
 				continue;
 			default: 
-				printf("\n\Opção inválida!\n\n");
+				printf("\n\n\Opção inválida!\n\n");
 				i--;
 				continue;
 		}
