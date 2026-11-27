@@ -30,6 +30,7 @@ int cadastraCategoria(categoria categorias[], int qtd) {
 
 	if (codigo < 1 || codigo > MAX_CATEGORIAS) {
 		printf("\nCódigo inválido! Use um valor de 1 a %d.\n", MAX_CATEGORIAS);
+		limpaBuffer();
 		return 0;
 		//verifica se o codigo da categoria está dentro dos parametros pré estabalecidos
 	}
@@ -89,6 +90,7 @@ int cadastraVeiculo(veiculo veiculos[], int qtd) {
 		limpaBuffer();
 		return 0;
 	}
+	limpaBuffer();
 
 	for (i = 0; i < qtd; i++) {
 		if (strcmp(veiculos[i].codigoVeiculo, codigo) == 0) {//verifica se o codigo informado pelo usuario não está repetido 
@@ -96,17 +98,14 @@ int cadastraVeiculo(veiculo veiculos[], int qtd) {
 			return 0;
 		}
 	}
-
-	strcpy(veiculos[qtd].codigoVeiculo, codigo);//função da biblioteca string que nos possiblita atribuir o valor de codigo para veiculos[qtd].codigoVeiculo
 	
 	printf("Informe a marca do veiculo: ");
 	if(scanf(" %19[^\n]", marca) != 1){//verifica se houve erro no scanf
-		printf("\nErro ao digitar a marca! \n");
+		printf("\nErro ao digitar a marca!\n");
 		limpaBuffer();//limpabuffer caso ocorra um erro
 		return 0; 
 	}
 	limpaBuffer();//limpa buffer para previnir erros
-	strcpy(veiculos[qtd].marca, marca);//função da biblioteca string que nos possiblita atribuir o valor de marca para veiculos[qtd].marca
 
 	
 	printf("Digite o modelo do veiculo: ");
@@ -116,7 +115,6 @@ int cadastraVeiculo(veiculo veiculos[], int qtd) {
 		return 0;
 	}
 	limpaBuffer();
-	strcpy(veiculos[qtd].modelo, modelo);
 	
 	printf("\nDigite a categoria veiculo cadastrado: \n");
 	if(scanf("%d", &codCategoria) != 1){
@@ -125,8 +123,11 @@ int cadastraVeiculo(veiculo veiculos[], int qtd) {
 		return 0;
 	}
 	limpaBuffer();
-	veiculos[qtd].categoria = codCategoria;
-	
+	pos = buscaCategoria(categoria, qtd, codCategoria);//OLHA AQUI DAVI
+	if(pos ==  -1){
+		printf("Categoria não cadastrada!\n");
+		return = 0;
+	}
 	
 	printf("Digite o ano do veiculo: ");
 	if(scanf("%d", &ano) != 1){
@@ -135,21 +136,23 @@ int cadastraVeiculo(veiculo veiculos[], int qtd) {
 		return 0;
 	} 
 	limpaBuffer();
-	veiculos[qtd].ano = ano;
+	if(ano < 1980 || ano > 2026){
+		printf("\nAno invalido!\n");
+		return 0;
+	}
 	
 	printf("\nInforme a diaria do veiculo: \n");
-		if(scanf("%f", &diaria) != 1){
+	if(scanf("%f", &diaria) != 1){
 		printf("\nErro ao cadastrar a diaria!\n");
 		limpaBuffer();
 		return 0;
-		}
+	}
+	limpaBuffer();
 
-		if (diaria <= 0) {
+	if (diaria <= 0) {
 		printf("\nA diaria deve ser maior que zero!\n");
 		return 0;
-		}
-	limpaBuffer();
-	veiculos[qtd].diaria = diaria;
+	}
 	
 	printf("\nInforme o número de unidades do veiculo: \n");
 	if(scanf("%d", &qtdUnidades) != 1){
@@ -164,9 +167,13 @@ int cadastraVeiculo(veiculo veiculos[], int qtd) {
 		return 0;
 	}
 	
-	
+	strcpy(veiculos[qtd].codigoVeiculo, codigo);//função da biblioteca string que nos possiblita atribuir o valor de codigo para veiculos[qtd].codigoVeiculo
+	strcpy(veiculos[qtd].marca, marca);//função da biblioteca string que nos possiblita atribuir o valor de marca para veiculos[qtd].marca	
+	strcpy(veiculos[qtd].modelo, modelo);
+	veiculos[qtd].categoria = codCategoria;
+	veiculos[qtd].ano = ano;
+	veiculos[qtd].diaria = diaria;
 	veiculos[qtd].qtdUnidades = qtdUnidades;
-	
 	veiculos[qtd].qtdAlugada = 0;
 	
 	printf("\nVeiculo cadastrado com sucesso!\n");
@@ -185,4 +192,13 @@ void exibirVeiculosAlugadosCategoria() {
 void exibirTodosVeiculoAlugadoPorCategoria() {
 }
 void exibirLocacoesAbertasGeral() {
+}
+int buscaCategoria(categoria categorias[], int qtd, int codigo) {//OLHA AQUI DAVI
+	int i;
+	for (i = 0; i < qtd; i++) {
+		if (categorias[i].codigoCategoria == codigo) {
+			return i;
+		}
+	}
+	return 0;
 }
