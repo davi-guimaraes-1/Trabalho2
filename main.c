@@ -3,11 +3,6 @@
 #include <locale.h>
 #include <stdlib.h>
 #include "locadora.h"
-#define MAX_LOCACOES 1000
-#define MAX_CATEGORIAS 10
-#define MAX_VEICULOS 100
-	
-	
 	
 	int main(void) {
 	veiculo veiculos[MAX_LOCACOES];
