@@ -1,9 +1,23 @@
 #include <stdio.h>
+#include <string.h>
 #include <locale.h>
 #include <stdlib.h>
 #include "locadora.h"
-
-int main(void) {
+#define MAX 1000
+#define MAX_CATEGORIAS 10
+#define MID 100
+	
+	
+	
+	int main(void) {
+	veiculo veiculos[MID];
+	Categoria categorias[MIN];
+ 	locacao locacoes[MAX];
+	int contCat=0;
+	int contVe=0;
+	int contLoc=0;
+	int qtdAcao;
+	
 	setlocale(LC_ALL, "Portuguese");
 	int select, i;
 	
@@ -34,31 +48,34 @@ int main(void) {
 				i--;
 				break;
 			case 1:
-				cadastraCategoria;
-				continue;
+			if (cadastraCategoria(categorias, contCat) == 1) {
+   				contCat++;
+   				qtdAcao++;
+			}
+			continue;
 			case 2:
-				exibirCategoria;
+				exibirCategoria();
 				continue;
 			case 3:
-				cadastraVeiculo;
+				cadastraVeiculo();
 				continue;
 			case 4:
-				exibirRelacao;
+				exibirRelacao();
 				continue;
 			case 5:
-				realizarAluguel;
+				realizarAluguel();
 				continue;
 			case 6:
-				realizarDevolucao;
+				realizarDevolucao();
 				continue;
 			case 7:
-				exibirVeiculosAlugadosCategoria;
+				exibirVeiculosAlugadosCategoria();
 				continue;
 			case 8:
-				exibirTodosVeiculoAlugadoPorCategoria;
+				exibirTodosVeiculoAlugadoPorCategoria();
 				continue;
 			case 9:
-				exibirLocacoesAbertasGeral;
+				exibirLocacoesAbertasGeral();
 				continue;
 			default: 
 				printf("\n\Opção inválida!\n\n");
