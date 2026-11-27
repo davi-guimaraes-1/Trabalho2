@@ -123,10 +123,20 @@ int cadastraVeiculo(veiculo veiculos[], int qtd) {
 		return 0;
 	}
 	limpaBuffer();
-	pos = buscaCategoria(categoria, qtd, codCategoria);//OLHA AQUI DAVI
+	pos = buscaCategoria(categoria, qtd, codCategoria);
 	if(pos ==  -1){
 		printf("Categoria não cadastrada!\n");
-		return = 0;
+	}
+	printf("\nCategoria encontrada: %s\n", categorias[pos].nome);//pos é a posição, por isso dá pra pegar o nome
+	printf("Confirma? (S/N): ");
+	if (scanf(" %c", &resp) != 1) {
+		limpaBuffer();
+		return 0;
+	}
+	limpaBuffer();
+	if (resp != 'S' && resp != 's') {
+		printf("\nCadastro cancelado.\n");
+		return 0;
 	}
 	
 	printf("Digite o ano do veiculo: ");
@@ -193,12 +203,12 @@ void exibirTodosVeiculoAlugadoPorCategoria() {
 }
 void exibirLocacoesAbertasGeral() {
 }
-int buscaCategoria(categoria categorias[], int qtd, int codigo) {//OLHA AQUI DAVI
+int buscaCategoria(categoria categorias[], int qtd, int codigo) {
 	int i;
 	for (i = 0; i < qtd; i++) {
 		if (categorias[i].codigoCategoria == codigo) {
 			return i;
 		}
 	}
-	return 0;
+	return -1;
 }
