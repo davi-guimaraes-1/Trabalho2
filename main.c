@@ -1,6 +1,6 @@
 /* TRABALHO DE ALGORITMOS E ESTRUTURAS DE DADOS
    NOME DO SISTEMA DESENVOLVIDO: Locadora de Carros
-   COMPONENTES: (nomes dos integrantes em ordem alfabética)
+   COMPONENTES: Davi Guimarães, Gustavo Brzesky, Henrique Paiva
    DATA: (data da última alteração) */
 
 #include <stdio.h>
@@ -63,7 +63,7 @@ int main(void) {
 				}
 				continue;
 			case 4:
-				exibirRelacao();
+				exibirRelacao(veiculos, categorias, qtdVeic, qtdCat);
 				continue;
 			case 5:
 				realizarAluguel();
