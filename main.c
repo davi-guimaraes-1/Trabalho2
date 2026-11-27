@@ -1,87 +1,128 @@
 #include <stdio.h>
-#include <string.h>
 #include <locale.h>
-#include <stdlib.h>
+#include <string.h>
 #include "locadora.h"
+#define MAX 1000
+#define MAX_CATEGORIAS 10
+#define MID 100 
+
+
+
+void limpaBuffer() {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF) {
+    }
+}
+
+int cadastraCategoria(categoria categorias[], int qtd) {
+	int codigo, i;
 	
-	int main(void) {
-	veiculo veiculos[MAX_LOCACOES];
-	Categoria categorias[MAX_CATEGORIAS];
- 	locacao locacoes[MAX_VEICULOS];
-	int contCat=0;
-	int contVe=0;
-	int contLoc=0;
-	int qtdAcao;
+	if (qtd >= MAX_CATEGORIAS) {
+		printf("Número máximo de categorias atingido!\n");
+		return 0;
+		//verifica se o vetor está preenchido com a qtd que é contada no main e passada por parametro
+	}
+
+	printf("Informe o codigo da categoria que deseja cadastrar: ");
 	
-	setlocale(LC_ALL, "Portuguese");
-	int select, i;
-	
-	do {
-		printf(
-		"======================================================\n"
-		" >SELECIONE UMA DAS OPÇÕES ABAIXO PARA PROSSEGUIR<\n"
-		"\n\n 0) SAIR DA APLICAÇÃO" 
-		"\n 1) CADASTRAR CATEGORIA."
-		"\n 2) EXIBIR CATEGORIAS."
-		"\n 3) INSERIR VEÍCULO."
-		"\n 4) EXIBIR RELAÇÃO DE VEÍCULOS."
-		"\n 5) REALIZAR ALUGUEL."
-		"\n 6) REALIZAR DEVOLUÇÃO"
-		"\n 7) EXIBIR VEÍCULOS ALUGADOS DE UMA DETERMINADA CATEGORIA"
-		"\n 8) EXIBIR VEÍCULOS ALUGADOS POR CATEGORIA."
-		"\n 9) EXIBIR LOCAÇÕES ABERTAS.\n\n\n"
-		"======================================================\n"
-		);
-		
-		printf("Digite a opção desejada: ");
-		scanf("%d", &select);
-		
-		i++;
-		
-		switch (select) {
-			case 0:
-				i--;
-				break;
-			case 1:
-			if (cadastraCategoria(categorias, contCat) == 1) {
-   				contCat++;
-   				qtdAcao++;
-			}
-			continue;
-			case 2:
-				exibirCategoria(categorias, contCat);
-				qtdAcao++;
-				continue;
-			case 3:
-				if (cadastraVeiculo(veiculos, contVe) == 1){
-					contVe++;
-					qtdAcao++;
-				}
-				
-				continue;
-			case 4:
-				exibirRelacao();
-				continue;
-			case 5:
-				realizarAluguel();
-				continue;
-			case 6:
-				realizarDevolucao();
-				continue;
-			case 7:
-				exibirVeiculosAlugadosCategoria();
-				continue;
-			case 8:
-				exibirTodosVeiculoAlugadoPorCategoria();
-				continue;
-			case 9:
-				exibirLocacoesAbertasGeral();
-				continue;
-			default: 
-				printf("\n\Opção inválida!\n\n");
-				i--;
-				continue;
+	if (scanf("%d", &codigo) != 1) {
+		printf("\nFalha ao ler o número!\n");
+		limpaBuffer();
+		return 0;
+		//verifica se houve exito no scanf, caso haja ele continua, caso haja algum erro ele retirna 0 voltando para o main
+	}
+
+	if (codigo < 1 || codigo > MAX_CATEGORIAS) {
+		printf("\nCódigo inválido! Use um valor de 1 a %d.\n", MAX_CATEGORIAS);
+		return 0;
+		//verifica se o codigo da categoria está dentro dos parametros pré estabalecidos
+	}
+
+	for (i = 0 ; i < qtd; i++) {
+		if (categorias[i].codigoCategoria == codigo) {
+			printf("\nJá existe uma categoria com esse código!\n");
+			return 0;
+		//verifica se o usuario colocou un codigo repetido
 		}
-	} while(i != 0);
-	return 0;
+	}
+
+	categorias[qtd].codigoCategoria = codigo;
+	//atribui o valor e codigo informado pelo usuario ao struct
+	//a variavel codigo foi usado por segurança, pois caso haja algum erro o programa não amarzena diretamente no struct 
+	
+	printf("\n\n Informe o nome da categoria que deseja cadastrar: ");
+	if (scanf(" %19[^\n]", categorias[qtd].nome) != 1){//verifica se houve erro ao digitar a string, caso haja retorna 0 e volta para o main
+		printf("\nErro ao digitar o nome!\n");
+		limpaBuffer();
+		//limpa buffer para caso haja erro ao digitar a string, 
+		return 0;
+	}
+	limpaBuffer();//limpa o buffer para previnir possiveis erros no programa
+	printf("\nCategoria cadastrada com sucesso!\n");
+	return 1;
+}
+
+void exibirCategoria(categoria categorias[], int qtd) {
+	int i;
+	for (i = 0; i < qtd; i++){//simplesmente o qtd que é passado com a quantidade qtdCat no main, conta quanto numero de veiculos foi inserido o codigo e exibe cada dado em relação a cada posição
+		printf("======================================================\n");
+		printf("\nCodigo da categoria: %d\n", categorias[i].codigoCategoria);
+		printf("\nNome da categoria: %s\n", categorias[i].nome);
+		printf("======================================================\n");
+	}
+}
+
+int cadastraVeiculo(veiculo veiculos[], int qtd) {
+	//vetores auxiliares para caso haja erro não passe valores errados ao struct
+	char codigo[30];
+	char auxiliar[20];
+	char ajuda[40];
+	int i;
+
+	if (qtd >= MAX_VEICULOS) {
+		printf("Número máximo de categorias atingido!\n");
+		return 0;
+	//caso o vetor tenha atingido o numero maximo de elementops
+	}
+
+	printf("Informe o codigo do veiculo: ");
+	if (scanf(" %29[^\n]", codigo) != 1) {//verifica se não houve erro no scanf e caso haja erro ele retorna 0, finalizando essa função voltando para o main
+		printf("Erro ao digitar o codigo! ");
+		limpaBuffer();
+		return 0;
+	}
+
+	for (i = 0; i < qtd; i++) {
+		if (strcmp(veiculos[i].codigoVeiculo, codigo) == 0) {//verifica se o codigo informado pelo usuario não está repetido 
+			printf("\nO codigo do veiculo está repetido!\n");
+			return 0;
+		}
+	}
+
+	strcpy(veiculos[qtd].codigoVeiculo, codigo);//função da biblioteca string que nos possiblita atribuir o valor de codigo para veiculos[qtd].codigoVeiculo
+	
+	printf("Informe a marca do veiculo: ");
+	if(scanf(" %19[^\n]", auxiliar) != 1){//verifica se houve erro no scanf
+		printf("\nErro ao digitar a marca! \n");
+		limpaBuffer();//limpabuffer caso ocorra um erro
+		return 0; 
+	}
+	limpaBuffer();//limpa buffer para previnir erros
+	strcpy(veiculos[qtd].marca, auxiliar);//função da biblioteca string que nos possiblita atribuir o valor de marca para veiculos[qtd].marca
+
+	return 1;
+}
+
+	
+void exibirRelacao() {
+}
+void realizarAluguel() {
+}
+void realizarDevolucao() {
+}
+void exibirVeiculosAlugadosCategoria() {
+}
+void exibirTodosVeiculoAlugadoPorCategoria() {
+}
+void exibirLocacoesAbertasGeral() {
 }
