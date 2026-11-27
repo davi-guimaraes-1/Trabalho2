@@ -3,16 +3,16 @@
 #include <locale.h>
 #include <stdlib.h>
 #include "locadora.h"
-#define MAX 1000
+#define MAX_LOCACOES 1000
 #define MAX_CATEGORIAS 10
-#define MID 100
+#define MAX_VEICULOS 100
 	
 	
 	
 	int main(void) {
-	veiculo veiculos[MID];
-	Categoria categorias[MIN];
- 	locacao locacoes[MAX];
+	veiculo veiculos[MAX_LOCACOES];
+	Categoria categorias[MAX_CATEGORIAS];
+ 	locacao locacoes[MAX_VEICULOS];
 	int contCat=0;
 	int contVe=0;
 	int contLoc=0;
@@ -54,10 +54,15 @@
 			}
 			continue;
 			case 2:
-				exibirCategoria();
+				exibirCategoria(categorias, contCat);
+				qtdAcao++;
 				continue;
 			case 3:
-				cadastraVeiculo();
+				if (cadastraVeiculo(veiculos, contVe) == 1){
+					contVe++;
+					qtdAcao++;
+				}
+				
 				continue;
 			case 4:
 				exibirRelacao();
