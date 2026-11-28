@@ -351,8 +351,59 @@ int realizarAluguel(int qtdLoc, int qtdVeic, int qtdCat) { // 5 - Abrir locaçã
 	
 }
 
-void realizarDevolucao() { // 6 - Fechar locação
+void realizarDevolucao(int qtdLoc, int qtdVeic) { // 6 - Fechar locação
+	int num, pos, atraso, valor, posVeic;
+	data devolucao;
 	
+	printf("\nInforme o número da locação: ");
+	scanf("%d", &num);
+	
+	pos = num - 1; // vetor começa no 0, então é um a menos
+	
+	if(locacoes[pos].status != 0) {	// Verifica se a locação está aberta
+		printf("\nEssa locação não está aberta.\n");
+		return 0;
+	}
+	if(locacoes[pos].codigoVeiculo) { // Verifica se a locação existe
+		printf("\nEssa locação não existe.\n");
+		return 0;
+	}
+	
+	// Registra a data da devolução
+	printf("\nInforme a data efetiva da devolução:");
+	printf("\nDia: ");
+	scanf("%d", &devolucao.dia);
+	printf("\nMês: ");
+	scanf("%d", &devolucao.mes);
+	printf("\nAno: ");
+	scanf("%d", &devolucao.ano);
+	
+	// Confere se é uma data válida e em seguida calcula os dias de atraso;
+	if (dataValida(devolucao) == 0) {
+		printf("Data inválida!");
+		return 0;
+	}
+	if (calcularDias(locacoes[pos].dataRetirada, devolucao) == -1) {
+		printf("A data de devolução não pode ser anterior à data de retirada!");
+		return 0;
+	}
+	atraso = calcularDias(locacoes[pos].dataPrevistaDevolucao, devolucao);
+	
+	// Calcula o valor que será pago
+	if(atraso > 0) {
+		locacoes[pos].status = 2;
+		valor = locacoes[pos].valorPrevisto + (atraso * locacoes[pos].diariaAtrasoContrato);
+	} else {
+		locacoes[pos].status = 1;
+		valor = locacoes[pos].valorPrevisto + (atraso * locacoes[pos].diariaAtrasoContrato);
+	}
+	
+	posVeic = buscaVeiculo(qtdVeic, locacoes[pos].codigoVeiculo);
+	
+	(veiculos[posVeic].qtdAlugada)--;
+	
+	locacoes[pos].valorPago = valor;
+	locacoes[pos].dataDevolucao = devolucao;
 }
 
 void exibirVeiculosAlugadosCategoria(int codigo, int qtd) { // 7 - Exibir veículos alugados por categoria
