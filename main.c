@@ -63,7 +63,9 @@ int main(void) {
 				exibirRelacao(qtdVeic, qtdCat);
 				continue;
 			case 5:
-				realizarAluguel();
+				if (realizarAluguel(qtdLoc, qtdVeic, qtdCat)) {
+					qtdLoc++;
+				}
 				continue;
 			case 6:
 				realizarDevolucao();
