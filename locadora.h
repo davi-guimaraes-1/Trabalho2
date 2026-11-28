@@ -57,7 +57,7 @@ void exibirCategoria(int qtd); // 2
 int cadastraVeiculo(int qtd, int qtdCat); // 3
 void exibirRelacao(int qtdVeic, int qtdCat); // 4
 int realizarAluguel(int qtdLoc, int qtdVeic, int qtdCat); // 5
-void realizarDevolucao(); // 6 
+void realizarDevolucao(int qtdLoc, int qtdVeic); // 6 
 void exibirVeiculosAlugadosCategoria(int codigo, int qtd); // 7 
 void exibirTodosVeiculoAlugadoPorCategoria(int qtd); // 8
 void exibirLocacoesAbertasGeral(); // 9
