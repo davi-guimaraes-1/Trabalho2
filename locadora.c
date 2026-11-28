@@ -10,7 +10,7 @@ void limpaBuffer() {
     }
 }
 
-int cadastraCategoria(int qtd) {
+int cadastraCategoria(int qtd) { // 1 - Cadastra Categoria
 	int codigo, i;
 	
 	if (qtd >= MAX_CATEGORIAS) {
@@ -62,7 +62,7 @@ int cadastraCategoria(int qtd) {
 
 }
 
-void exibirCategoria(int qtd) {
+void exibirCategoria(int qtd) { // 2 - Exibe Categorias
 	int i;
 	for (i = 0; i < qtd; i++){//simplesmente o qtd que é passado com a quantidade qtdCat no main, conta quanto numero de categorias foi inserido o codigo e exibe cada dado em relação a cada posição
 		printf("======================================================\n");
@@ -72,7 +72,7 @@ void exibirCategoria(int qtd) {
 	}
 }
 
-int cadastraVeiculo(int qtd, int qtdCat) {
+int cadastraVeiculo(int qtd, int qtdCat) { // 3 - Inserir veículo
 	//vetores auxiliares para caso haja erro não passe valores errados ao struct
 	char codigo[30];
 	char marca[20];
@@ -105,12 +105,12 @@ int cadastraVeiculo(int qtd, int qtdCat) {
 	}
 	
 	printf("Informe a marca do veiculo: ");
-	if(scanf(" %19[^\n]", marca) != 1){//verifica se houve erro no scanf
+	if(scanf(" %19[^\n]", marca) != 1){ // verifica se houve erro no scanf
 		printf("\nErro ao digitar a marca!\n");
-		limpaBuffer();//limpabuffer caso ocorra um erro
+		limpaBuffer(); // limpabuffer caso ocorra um erro
 		return 0; 
 	}
-	limpaBuffer();//limpa buffer para previnir erros
+	limpaBuffer(); // limpa buffer para previnir erros
 
 	
 	printf("Digite o modelo do veiculo: ");
@@ -133,7 +133,7 @@ int cadastraVeiculo(int qtd, int qtdCat) {
 		printf("Categoria não cadastrada!\n");
 		return 0;
 	}
-	printf("\nCategoria encontrada: %s\n", categorias[pos].nome);//pos é a posição, por isso dá pra pegar o nome
+	printf("\nCategoria encontrada: %s\n", categorias[pos].nome); // pos é a posição, por isso dá pra pegar o nome
 	printf("Confirma? (S/N): ");
 	if (scanf(" %c", &resp) != 1) {
 		limpaBuffer();
@@ -183,8 +183,8 @@ int cadastraVeiculo(int qtd, int qtdCat) {
 		return 0;
 	}
 	
-	strcpy(veiculos[qtd].codigoVeiculo, codigo);//função da biblioteca string que nos possiblita atribuir o valor de codigo para veiculos[qtd].codigoVeiculo
-	strcpy(veiculos[qtd].marca, marca);//função da biblioteca string que nos possiblita atribuir o valor de marca para veiculos[qtd].marca	
+	strcpy(veiculos[qtd].codigoVeiculo, codigo); // função da biblioteca string que nos possiblita atribuir o valor de codigo para veiculos[qtd].codigoVeiculo
+	strcpy(veiculos[qtd].marca, marca); // função da biblioteca string que nos possiblita atribuir o valor de marca para veiculos[qtd].marca	
 	strcpy(veiculos[qtd].modelo, modelo);
 	veiculos[qtd].categoria = codCategoria;
 	veiculos[qtd].ano = ano;
@@ -197,7 +197,7 @@ int cadastraVeiculo(int qtd, int qtdCat) {
 }
 
 	
-void exibirRelacao(int qtdVeic, int qtdCat){
+void exibirRelacao(int qtdVeic, int qtdCat){ // 4 - Exibir relação de veículos
 	int i, posCat;
 
 	if (qtdVeic == 0) {
@@ -226,8 +226,7 @@ void exibirRelacao(int qtdVeic, int qtdCat){
 	}
 }
 
-
-int realizarAluguel(int qtdLoc, int qtdVeic, int qtdCat) {
+int realizarAluguel(int qtdLoc, int qtdVeic, int qtdCat) { // 5 - Abrir locação
 	char codigo[30], resp;
 	int posVeic, posCat, diasContratados;
 	data retirada, prevista;
@@ -348,43 +347,79 @@ int realizarAluguel(int qtdLoc, int qtdVeic, int qtdCat) {
 	printf("Valor previsto: R$ %.2f\n", valorPrevisto);
 	printf("======================================================\n");
 
-	return 1;
-}
-
-void realizarDevolucao() {
+	return 1; 
 	
 }
 
-void exibirVeiculosAlugadosCategoria(int codigo, int qtd) {
+void realizarDevolucao() { // 6 - Fechar locação
+	
+}
+
+void exibirVeiculosAlugadosCategoria(int codigo, int qtd) { // 7 - Exibir veículos alugados por categoria
 	int i;
-	int pos = buscaCategoria(qtd, codigo);
 	
-	printf("\nCategoria: %s", categorias[pos].nome);
+	// Confere qual é a categoria com o código recebido
+	int pos = buscaCategoria(qtd, codigo); 
+	
+	if (pos == -1) {
+		// Caso o código não tenha sido cadastrado ainda
+		printf("Código não encontrado.\n"); 
+		return 0;
+	}
+	
+	printf("\nCategoria: %s", categorias[pos].nome); 
 	
 	for(i = 0; i < MAX_VEICULOS; i++) {
 		
-		if(veiculos[i].qtdAlugada > 0) {
-			
-			printf("\n Código: %s", veiculos[i].codigoVeiculo);
-			printf("\n Marca: %s", veiculos[i].marca);
-			printf("\n Modelo: %s", veiculos[i].modelo);
-			printf("\n Quantidade alugada: %d\n", veiculos[i].qtdAlugada);
+		// Se o código for 0, quer dizer que não há mais veículos registrados e pode encerrar a função
+		if(veiculos[i].codigoVeiculo == 0) { 
+			return 0;
+		}
+		
+		if (veiculos[i].categoria == pos) {
+			// Será impresso aqui, para o número máximo de veículos registrados, todas as informações desse veículo específico
+			if(veiculos[i].qtdAlugada > 0) { 
+				printf("\n Código: %s", veiculos[i].codigoVeiculo);
+				printf("\n Marca: %s", veiculos[i].marca);
+				printf("\n Modelo: %s", veiculos[i].modelo);
+				printf("\n Quantidade alugada: %d\n", veiculos[i].qtdAlugada);
+			}
 		}
 	}
 }
 
-void exibirTodosVeiculoAlugadoPorCategoria(int qtd) {
+void exibirTodosVeiculoAlugadoPorCategoria(int qtd) { // 8 - Exibir todos os veículos alugados
 	int i;
 	
-	for(i = 0; i < qtd; i++) {
-		exibirVeiculosAlugadosCategoria(i, qtd);
+	for(i = 0; i < qtd; i++) { 
+	
+		// Para toda categoria já registrada será chamada a função para exibir os veículos por categoria
+		exibirVeiculosAlugadosCategoria(i, qtd); 
 	}
 }
 
-void exibirLocacoesAbertasGeral() {
-	
+void exibirLocacoesAbertasGeral() { // 9 - Exibir locações abertas
+	int i;
+	for(i = 0; i < MAX_LOCACOES; i++) {
+		
+		// Se o código for 0, quer dizer que não há mais veículos registrados e pode encerrar a função
+		if(locacoes[i].valorPrevisto < 1) { 
+			return 0;
+		}
+		
+		if(locacoes[i].status == 0) {
+			
+			printf("\n Número: %d", locacoes[i].numero);
+			printf("\n Código do veículo: %s", locacoes[i].codigoVeiculo);
+			printf("\n Data de retirada: %d/%d/%d", locacoes[i].dataRetirada.dia, locacoes[i].dataRetirada.mes, locacoes[i].dataRetirada.ano);
+			printf("\n Data prevista de devolução: %d/%d/%d", locacoes[i].dataPrevistaDevolucao.dia, locacoes[i].dataPrevistaDevolucao.mes, locacoes[i].dataPrevistaDevolucao.ano);
+			printf("\n Diária de atraso: %d", locacoes[i].diariaAtrasoContrato);
+			printf("\n Valor previsto: %d", locacoes[i].valorPrevisto);
+		}
+	}
 }
 
+// Busca a categoria do código informado, retorna -1 se não encontrar
 int buscaCategoria(int qtd, int codigo) {
 	int i;
 	for (i = 0; i < qtd; i++) {
