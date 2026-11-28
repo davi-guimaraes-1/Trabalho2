@@ -11,6 +11,7 @@
 int main(void) {
 	int qtdVeic = 0, qtdCat = 0, qtdLoc = 0;//contadores de elementos cadastrados
 	int select = -1, i = 0;//i conta as ações do usuário, sem contar a saída
+	int cod;
 	
 	setlocale(LC_ALL, "Portuguese");
 	
@@ -71,10 +72,12 @@ int main(void) {
 				realizarDevolucao();
 				continue;
 			case 7:
-				exibirVeiculosAlugadosCategoria();
+				printf("\nInforme o código: ");
+				scanf("%d", &cod);
+				exibirVeiculosAlugadosCategoria(cod, qtdCat);
 				continue;
 			case 8:
-				exibirTodosVeiculoAlugadoPorCategoria();
+				exibirTodosVeiculoAlugadoPorCategoria(qtdCat);
 				continue;
 			case 9:
 				exibirLocacoesAbertasGeral();
