@@ -39,14 +39,18 @@ typedef struct {
 	float valorPago;
 } locacao;
 
-int cadastraCategoria(categoria categorias[], int qtd);
-void exibirCategoria(categoria categorias[], int qtd);
-int cadastraVeiculo(veiculo veiculos[], int qtd, categoria categorias[], int qtdCat);
-void exibirRelacao(veiculo veiculos[], categoria categorias[], int qtdVeic, int qtdCat);
+veiculo veiculos[MAX_VEICULOS];//vetor de veículos (máx. 100)
+categoria categorias[MAX_CATEGORIAS];//vetor de categorias (máx. 10)
+locacao locacoes[MAX_LOCACOES];//vetor de locações (máx. 1000)
+
+int cadastraCategoria(int qtd);
+void exibirCategoria(int qtd);
+int cadastraVeiculo(int qtd, int qtdCat);
+void exibirRelacao(int qtdVeic, int qtdCat);
 void realizarAluguel();
 void realizarDevolucao();
 void exibirVeiculosAlugadosCategoria();
 void exibirTodosVeiculoAlugadoPorCategoria();
 void exibirLocacoesAbertasGeral();
 void limpaBuffer();
-int buscaCategoria(categoria categorias[], int qtd, int codigo);
+int buscaCategoria(int qtd, int codigo);
