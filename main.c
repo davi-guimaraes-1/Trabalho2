@@ -69,7 +69,7 @@ int main(void) {
 				}
 				continue;
 			case 6:
-				realizarDevolucao();
+				realizarDevolucao(qtdLoc, qtdVeic);
 				continue;
 			case 7:
 				printf("\nInforme o código: ");
