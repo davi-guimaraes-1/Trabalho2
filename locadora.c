@@ -48,7 +48,7 @@ int cadastraCategoria(int qtd) { // 1 - Cadastra Categoria
 	//atribui o valor e codigo informado pelo usuario ao struct
 	//a variavel codigo foi usado por segurança, pois caso haja algum erro o programa não amarzena diretamente no struct 
 	
-	printf("\n\n Informe o nome da categoria que deseja cadastrar: ");
+	printf("\n\nInforme o nome da categoria que deseja cadastrar: ");
 	if (scanf(" %19[^\n]", categorias[qtd].nome) != 1){//verifica se houve erro ao digitar a string, caso haja retorna 0 e volta para o main
 		printf("\nErro ao digitar o nome!\n");
 		limpaBuffer();
@@ -91,7 +91,7 @@ int cadastraVeiculo(int qtd, int qtdCat) { // 3 - Inserir veículo
 
 	printf("Informe o codigo do veiculo: ");
 	if (scanf(" %29[^\n]", codigo) != 1) {//verifica se não houve erro no scanf e caso haja erro ele retorna 0, finalizando essa função voltando para o main
-		printf("Erro ao digitar o codigo! ");
+		printf("Erro ao digitar o codigo!\n");
 		limpaBuffer();
 		return 0;
 	}
@@ -172,7 +172,7 @@ int cadastraVeiculo(int qtd, int qtdCat) { // 3 - Inserir veículo
 	
 	printf("\nInforme o número de unidades do veiculo: \n");
 	if(scanf("%d", &qtdUnidades) != 1){
-		printf("\nErro ao cadastrar o número de unidades do veiculo");
+		printf("\nErro ao cadastrar o número de unidades do veiculo\n");
 		limpaBuffer();
 		return 0;
 	}		
@@ -352,7 +352,8 @@ int realizarAluguel(int qtdLoc, int qtdVeic, int qtdCat) { // 5 - Abrir locaçã
 }
 
 void realizarDevolucao(int qtdLoc, int qtdVeic) { // 6 - Fechar locação
-	int num, pos, atraso, valor, posVeic;
+	int num, pos, atraso, posVeic;
+	float valor;
 	data devolucao;
 	
 	printf("\nInforme o número da locação: ");
@@ -406,7 +407,7 @@ void realizarDevolucao(int qtdLoc, int qtdVeic) { // 6 - Fechar locação
 	locacoes[pos].dataDevolucao = devolucao;
 }
 
-void exibirVeiculosAlugadosCategoria(int codigo, int qtd) { // 7 - Exibir veículos alugados por categoria
+void exibirVeiculosAlugadosCategoria(char codigo[], int qtd) { // 7 - Exibir veículos alugados por categoria
 	int i;
 	
 	// Confere qual é a categoria com o código recebido
@@ -445,7 +446,7 @@ void exibirTodosVeiculoAlugadoPorCategoria(int qtd) { // 8 - Exibir todos os ve�
 	for(i = 0; i < qtd; i++) { 
 	
 		// Para toda categoria já registrada será chamada a função para exibir os veículos por categoria
-		exibirVeiculosAlugadosCategoria(i, qtd); 
+		exibirVeiculosAlugadosCategoria(veiculos[i].codigoVeiculo, qtd); 
 	}
 }
 
@@ -465,7 +466,7 @@ void exibirLocacoesAbertasGeral() { // 9 - Exibir locações abertas
 			printf("\n Data de retirada: %d/%d/%d", locacoes[i].dataRetirada.dia, locacoes[i].dataRetirada.mes, locacoes[i].dataRetirada.ano);
 			printf("\n Data prevista de devolução: %d/%d/%d", locacoes[i].dataPrevistaDevolucao.dia, locacoes[i].dataPrevistaDevolucao.mes, locacoes[i].dataPrevistaDevolucao.ano);
 			printf("\n Diária de atraso: %d", locacoes[i].diariaAtrasoContrato);
-			printf("\n Valor previsto: %d", locacoes[i].valorPrevisto);
+			printf("\n Valor previsto: %f\n", locacoes[i].valorPrevisto);
 		}
 	}
 }
