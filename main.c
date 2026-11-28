@@ -9,9 +9,6 @@
 #include "locadora.h"
 
 int main(void) {
-	veiculo veiculos[MAX_VEICULOS];//vetor de veículos (máx. 100)
-	categoria categorias[MAX_CATEGORIAS];//vetor de categorias (máx. 10)
-	locacao locacoes[MAX_LOCACOES];//vetor de locações (máx. 1000)
 	int qtdVeic = 0, qtdCat = 0, qtdLoc = 0;//contadores de elementos cadastrados
 	int select = -1, i = 0;//i conta as ações do usuário, sem contar a saída
 	
@@ -50,20 +47,20 @@ int main(void) {
 				i--;
 				break;
 			case 1:
-				if (cadastraCategoria(categorias, qtdCat)) {
+				if (cadastraCategoria(qtdCat)) {
 					qtdCat++;//só aumenta se o cadastro deu certo
 				}
 				continue;
 			case 2:
-				exibirCategoria(categorias, qtdCat);
+				exibirCategoria(qtdCat);
 				continue;
 			case 3:
-				if (cadastraVeiculo(veiculos, qtdVeic, categorias, qtdCat)) {
+				if (cadastraVeiculo(qtdVeic, qtdCat)) {
 					qtdVeic++;//só aumenta se o cadastro deu certo
 				}
 				continue;
 			case 4:
-				exibirRelacao(veiculos, categorias, qtdVeic, qtdCat);
+				exibirRelacao(qtdVeic, qtdCat);
 				continue;
 			case 5:
 				realizarAluguel();
