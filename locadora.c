@@ -10,7 +10,7 @@ void limpaBuffer() {
     }
 }
 
-int cadastraCategoria(categoria categorias[], int qtd) {
+int cadastraCategoria(int qtd) {
 	int codigo, i;
 	
 	if (qtd >= MAX_CATEGORIAS) {
@@ -42,8 +42,9 @@ int cadastraCategoria(categoria categorias[], int qtd) {
 		//verifica se o usuario colocou un codigo repetido
 		}
 	}
-
+	
 	categorias[qtd].codigoCategoria = codigo;
+	
 	//atribui o valor e codigo informado pelo usuario ao struct
 	//a variavel codigo foi usado por segurança, pois caso haja algum erro o programa não amarzena diretamente no struct 
 	
@@ -55,11 +56,13 @@ int cadastraCategoria(categoria categorias[], int qtd) {
 		return 0;
 	}
 	limpaBuffer();//limpa o buffer para previnir possiveis erros no programa
+	
 	printf("\nCategoria cadastrada com sucesso!\n");
 	return 1;
+
 }
 
-void exibirCategoria(categoria categorias[], int qtd) {
+void exibirCategoria(int qtd) {
 	int i;
 	for (i = 0; i < qtd; i++){//simplesmente o qtd que é passado com a quantidade qtdCat no main, conta quanto numero de categorias foi inserido o codigo e exibe cada dado em relação a cada posição
 		printf("======================================================\n");
@@ -69,7 +72,7 @@ void exibirCategoria(categoria categorias[], int qtd) {
 	}
 }
 
-int cadastraVeiculo(veiculo veiculos[], int qtd, categoria categorias[], int qtdCat) {
+int cadastraVeiculo(int qtd, int qtdCat) {
 	//vetores auxiliares para caso haja erro não passe valores errados ao struct
 	char codigo[30];
 	char marca[20];
@@ -118,14 +121,14 @@ int cadastraVeiculo(veiculo veiculos[], int qtd, categoria categorias[], int qtd
 	}
 	limpaBuffer();
 	
-	printf("\nDigite a categoria veiculo cadastrado:");
+	printf("\nDigite a categoria veiculo cadastrado: \n");
 	if(scanf("%d", &codCategoria) != 1){
 		printf("Erro ao cadastrar categoria!");
 		limpaBuffer();		
 		return 0;
 	}
 	limpaBuffer();
-	pos = buscaCategoria(categorias, qtdCat, codCategoria);
+	pos = buscaCategoria(qtdCat, codCategoria);
 	if(pos ==  -1){
 		printf("Categoria não cadastrada!\n");
 		return 0;
@@ -154,7 +157,7 @@ int cadastraVeiculo(veiculo veiculos[], int qtd, categoria categorias[], int qtd
 		return 0;
 	}
 	
-	printf("\nInforme a diaria do veiculo: ");
+	printf("\nInforme a diaria do veiculo: \n");
 	if(scanf("%f", &diaria) != 1){
 		printf("\nErro ao cadastrar a diaria!\n");
 		limpaBuffer();
@@ -167,7 +170,7 @@ int cadastraVeiculo(veiculo veiculos[], int qtd, categoria categorias[], int qtd
 		return 0;
 	}
 	
-	printf("\nInforme o número de unidades do veiculo: ");
+	printf("\nInforme o número de unidades do veiculo: \n");
 	if(scanf("%d", &qtdUnidades) != 1){
 		printf("\nErro ao cadastrar o número de unidades do veiculo");
 		limpaBuffer();
@@ -189,20 +192,21 @@ int cadastraVeiculo(veiculo veiculos[], int qtd, categoria categorias[], int qtd
 	veiculos[qtd].qtdUnidades = qtdUnidades;
 	veiculos[qtd].qtdAlugada = 0;
 	
-	printf("\nVeiculo cadastrado com sucesso!\n");
+	printf("\nVeiculo cadastrado com sucesso!");
 	return 1;
 }
 
-void exibirRelacao(veiculo veiculos[], categoria categorias[], int qtdVeic, int qtdCat){
-	int i, posCat;
 	
+void exibirRelacao(int qtdVeic, int qtdCat){
+	int i, posCat;
+
 	if (qtdVeic == 0) {
 		printf("\nNão há veículos cadastrados!\n");
 		return;
 	}
 	
 	for (i = 0; i < qtdVeic; i++) {
-		posCat = buscaCategoria(categorias, qtdCat, veiculos[i].categoria);
+		posCat = buscaCategoria(qtdCat, veiculos[i].categoria);
 		
 		if (posCat != -1) {
 			printf("Nome da categoria: %s\n", categorias[posCat].nome);
@@ -222,17 +226,46 @@ void exibirRelacao(veiculo veiculos[], categoria categorias[], int qtdVeic, int 
 	}
 }
 
+
 void realizarAluguel() {
+	
 }
+
 void realizarDevolucao() {
+	
 }
-void exibirVeiculosAlugadosCategoria() {
+
+void exibirVeiculosAlugadosCategoria(int codigo, int qtd) {
+	int i;
+	int pos = buscaCategoria(qtd, codigo);
+	
+	printf("\nCategoria: %s", categorias[pos].nome);
+	
+	for(i = 0; i < MAX_VEICULOS; i++) {
+		
+		if(veiculos[i].qtdAlugada > 0) {
+			
+			printf("\n Código: %s", veiculos[i].codigoVeiculo);
+			printf("\n Marca: %s", veiculos[i].marca);
+			printf("\n Modelo: %s", veiculos[i].modelo);
+			printf("\n Quantidade alugada: %d\n", veiculos[i].qtdAlugada);
+		}
+	}
 }
-void exibirTodosVeiculoAlugadoPorCategoria() {
+
+void exibirTodosVeiculoAlugadoPorCategoria(int qtd) {
+	int i;
+	
+	for(i = 0; i < qtd; i++) {
+		exibirVeiculosAlugadosCategoria(i, qtd);
+	}
 }
+
 void exibirLocacoesAbertasGeral() {
+	
 }
-int buscaCategoria(categoria categorias[], int qtd, int codigo) {
+
+int buscaCategoria(int qtd, int codigo) {
 	int i;
 	for (i = 0; i < qtd; i++) {
 		if (categorias[i].codigoCategoria == codigo) {
