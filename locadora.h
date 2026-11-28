@@ -1,9 +1,9 @@
 #ifndef LOCADORA_H
 #define LOCADORA_H
-
 #define MAX_LOCACOES 1000
 #define MAX_CATEGORIAS 10
 #define MAX_VEICULOS 100
+#endif
 
 typedef struct {
 	int dia;
@@ -51,13 +51,13 @@ int buscaVeiculo(int qtd, char codigo[]);
 int dataValida(data d);
 int calcularDias(data inicio, data fim);
 
-// Operações do menu
-int cadastraCategoria(int qtd);
-void exibirCategoria(int qtd);
-int cadastraVeiculo(int qtd, int qtdCat);
-void exibirRelacao(int qtdVeic, int qtdCat);
-int realizarAluguel(int qtdLoc, int qtdVeic, int qtdCat);
-void realizarDevolucao();
-void exibirVeiculosAlugadosCategoria();
-void exibirTodosVeiculoAlugadoPorCategoria();
-void exibirLocacoesAbertasGeral();
+// Operações do Menu
+int cadastraCategoria(int qtd); // 1
+void exibirCategoria(int qtd); // 2
+int cadastraVeiculo(int qtd, int qtdCat); // 3
+void exibirRelacao(int qtdVeic, int qtdCat); // 4
+int realizarAluguel(int qtdLoc, int qtdVeic, int qtdCat); // 5
+void realizarDevolucao(); // 6 
+void exibirVeiculosAlugadosCategoria(int codigo, int qtd); // 7 
+void exibirTodosVeiculoAlugadoPorCategoria(int qtd); // 8
+void exibirLocacoesAbertasGeral(); // 9
